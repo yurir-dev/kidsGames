@@ -1,6 +1,6 @@
 
 import random
-import sys
+import sys, os
 import getopt
 import pdb
 import time
@@ -223,14 +223,20 @@ def executeGreaterGame(min=1, max=98, iter=5, waitTime=5):
     print(f"Bravo, t'as fini ce jou, t'as reussi {cntSuccess} fois de {iter} ")
     print("Merci pour jouer avec moi :-) ")
 
+def usage():
+    print("")
+    print("--game [sum|next|entre|greater] --min [0] --max [100] --iter [5] --wait [5] --name [Katherine]")
+    print("")
+
 if __name__ == "__main__":
-    options, args = getopt.getopt(sys.argv[1:], "g:s:b,i,w,n",
+    options, args = getopt.getopt(sys.argv[1:], "g:s:b:i:w:n:h",
                                ["game=",
                                 "min=",
                                 "max=",
                                 "iter=",
                                 "wait=",
-                                "name="])
+                                "name=",
+                                "help"])
     game = ''
     _min, _max = 0, 100
     _iter = 5
@@ -250,6 +256,9 @@ if __name__ == "__main__":
         elif opt in ['-n', '--name']:
             userName = arg
             messageCorrect = f'Bravo {userName}  :-) :-) :-) :-) :-) :-) :-) :-)  Bon reponse'
+        elif opt in ['-h', '--help']:
+            usage()
+            exit(0)
         else:
             raise Exception(f"unexpected argument: {opt}")
     
