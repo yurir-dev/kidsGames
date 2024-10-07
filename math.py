@@ -272,9 +272,10 @@ if __name__ == "__main__":
         executeGreaterGame(_min, _max, _iter, waitTime)
     else:
         print("no game was specified, try --game sum")
+        usage()
+        exit(1)
 
-
-
+    exit(0)
 
 
 
