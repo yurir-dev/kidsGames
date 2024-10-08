@@ -225,7 +225,7 @@ def executeGreaterGame(min=1, max=98, iter=5, waitTime=5):
 
 def usage():
     print("")
-    print("--game [sum|next|entre|greater] --min [0] --max [100] --iter [5] --wait [5] --name [Katherine]")
+    print("--game [add|avant|entre|grand] --min [0] --max [100] --iter [5] --wait [5] --name [Katherine]")
     print("")
 
 if __name__ == "__main__":
@@ -242,7 +242,7 @@ if __name__ == "__main__":
     _iter = 5
     waitTime = 5
     for opt, arg in options:
-        print(f"opt: {opt}, arg: {arg}")
+        #print(f"opt: {opt}, arg: {arg}")
         if opt in ['-g', '--game']:
             game = arg
         elif opt in ['-s', '--min']:
@@ -262,16 +262,17 @@ if __name__ == "__main__":
         else:
             raise Exception(f"unexpected argument: {opt}")
     
-    if game == 'sum':
+    if game == 'add':
         executeSumGame(_min, _max, _iter, waitTime)
-    elif game == 'next':
+    elif game == 'avant':
         executeNextGame(_min, _max, _iter, waitTime)
     elif game == 'entre':
         executeEntreGame(_min, _max, _iter, waitTime)
-    elif game == 'greater':
+    elif game == 'grand':
         executeGreaterGame(_min, _max, _iter, waitTime)
     else:
-        print("no game was specified, try --game sum")
+        print("")
+        print("tu n'as pas specifie le joue, essay --game add")
         usage()
         exit(1)
 
