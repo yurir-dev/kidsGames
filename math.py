@@ -223,9 +223,68 @@ def executeGreaterGame(min=1, max=98, iter=5, waitTime=5):
     print(f"Bravo, t'as fini ce jou, t'as reussi {cntSuccess} fois de {iter} ")
     print("Merci pour jouer avec moi :-) ")
 
+def executeOrderGame(min=1, max=100, iter=5, waitTime=5):
+    print("\n")
+    print("Bienvenue au jou de order !")
+    print(f"Tu vas arranger les numeros dans un ordre croissant ou decroisant")
+    print("Bonne chance !")
+    print("")
+
+    cntSuccess = 0
+    for i in range(0, iter):
+        numbers = [random.randrange(min, max) for _ in range(0, 5)]
+        reverse = False if random.randrange(0, 2) == 1 else True
+        correctRes = numbers.copy()
+        correctRes.sort(reverse=reverse)
+        
+        print("\n")
+        print("---------------------------------------------------")
+        print("\n")
+        
+        userRes = -1
+        numOfTries = [1, 2, 3]
+        for _try in numOfTries:
+            
+            print(f"place le numeros dans l'ordre ", end='')
+            if (reverse):
+                print(f"decroisante : ", end='')
+            else:
+                print(f"croisante : ", end='')
+            for n in numbers:
+                print(f"{n}, ", end='')
+            print(" : ", end='')
+           
+            userInput = input()
+            userRes = []
+            try:
+                userRes = [int(s) for s in userInput.split(',')]
+            except:
+                pass
+            if userRes == correctRes:
+                print(messageCorrect)
+                cntSuccess += 1
+                time.sleep(waitTime)
+                break
+            else:
+                print(f"Le reponse ne est pas correct :-(")
+                print(f"{userInput} n'est pas correct ordre")
+                if _try < len(numOfTries):
+                    print(f"essay encore, il rest {len(numOfTries) - _try} de {len(numOfTries)}")
+                print("")
+        
+        if userRes != correctRes:
+            print(f"hmm... laisse-moi t'aider, bonne réponse est: {correctRes}")
+            print("plus de chance la prochaine fois")
+            time.sleep(waitTime)
+
+    print("")
+    print(f"Bravo, t'as fini ce jou, t'as reussi {cntSuccess} fois de {iter} ")
+    print("Merci pour jouer avec moi :-) ")
+
+
 def usage():
     print("")
-    print("--game [add|avant|entre|grand] --min [0] --max [100] --iter [5] --wait [5] --name [Katherine]")
+    print("--game [add|avant|entre|grand|order] --min [0] --max [100] --iter [5] --wait [5] --name [Katherine]")
     print("")
 
 if __name__ == "__main__":
@@ -270,6 +329,8 @@ if __name__ == "__main__":
         executeEntreGame(_min, _max, _iter, waitTime)
     elif game == 'grand':
         executeGreaterGame(_min, _max, _iter, waitTime)
+    elif game == 'order':
+        executeOrderGame(_min, _max, _iter, waitTime)
     else:
         print("")
         print("tu n'as pas specifie le joue, essay --game add")
